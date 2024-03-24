@@ -1,0 +1,53 @@
+package mar24;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.*;
+
+interface IfunctionalInterface{
+    void add(int a,int b);
+}
+
+public class LambdaExpression {
+    public static void main(String [] args){
+        List<Integer> listInteger = Arrays.asList(3,9,5,27);
+
+//lambda
+        listInteger.stream().filter(i->i%3==0).forEach(a->{
+            System.out.println(a);
+        });
+//method reference
+        listInteger.stream().filter(i->i%3==0).forEach(System.out::println);
+
+
+        List<Integer> mapedlist  =  listInteger.stream().map(i->i*2).collect(Collectors.toList());
+        List<Integer> filteredlist  =  listInteger.stream().filter(i->i%3==0).collect(Collectors.toList());
+        List<Integer> revsortedlist  =  listInteger.stream().sorted((Integer a,Integer b)->b-a).collect(Collectors.toList());
+        List<Integer> sortedlist  =  listInteger.stream().sorted().collect(Collectors.toList());
+        System.out.println(mapedlist);
+        System.out.println(filteredlist);
+        System.out.println(revsortedlist);
+        System.out.println(sortedlist);
+
+
+
+
+
+        int a = 5;
+        int b = 6;
+
+        IfunctionalInterface i = new IfunctionalInterface(){
+            @Override
+            public void add(int c,int b) {
+                System.out.println("Here inside add:::"+c+" "+b);
+            }
+        };
+        i.add(a,b);
+//lambda used for implementing the method for a functional iterface
+        IfunctionalInterface i1 = (int c,int d)->{System.out.println("Here outside add"+c+d);};
+        i1.add(a,b);
+
+
+    }
+}
